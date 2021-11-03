@@ -1,0 +1,42 @@
+﻿@model WeatherForecastViewModel
+
+@{
+    ViewData["Title"] = "Vädret";
+}
+
+<div class="content">
+    <div class="header">
+        <h1>vädret</h1>
+        <div class="city">
+            <i class="bi bi-geo-alt-fill"></i>
+            <h2 class="thin-font">KARLSTAD</h2>
+        </div>
+    </div>
+   
+
+
+
+    <div id="weatherCurrentAndDaily">
+
+        @await Html.PartialAsync("_WeatherCurrentAndDaily", @Model)
+
+    </div>
+</div>
+
+<script>
+
+    setInterval(updateForecast, 600000);
+
+    function updateForecast() {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("LoadForecast", "Home")",
+            success: function(result) {
+
+                if (result) {
+                    $("#weatherCurrentAndDaily").html(result)
+                }
+            }
+        });
+    }
+</script>

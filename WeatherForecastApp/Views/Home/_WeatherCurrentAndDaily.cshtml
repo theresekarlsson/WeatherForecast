@@ -1,0 +1,40 @@
+﻿@model WeatherForecastApp.Models.WeatherForecastViewModel
+
+
+    <div class="today">
+        <div class="today-date">@Model.CurrentDayOfWeek @Model.CurrentDate</div>
+
+        <div class="main">
+            <img alt="weather icon" src="@Model.WeatherDescription[0].Icon" />
+            <div class="today-temp">@Model.CurrentTemp°</div>
+        </div>
+
+        <div class="info">
+            <div class="today-description">Just nu @Model.WeatherDescription[0].Description.</div>
+            <div class="today-feelslike">Känns som @Model.CurrentFeelsLike°</div>
+        </div>
+
+        <div class="weather-details">
+            <div class="details"><i class="bi bi-umbrella-fill"></i>Sannolikhet för nederbörd: <span class="tiny-margin">@Model.CurrentPrecipitation%</span></div>
+            <div class="details"><i class="bi bi-wind"></i>Vind: <span class="tiny-margin">@Model.CurrentWindSpeed m/s</span></div>
+            <div class="details"><i class="bi bi-moisture"></i>Luftfuktighet: <span class="tiny-margin">@Model.CurrentHumidity%</span></div>
+            <div class="details"><i class="bi bi-clock"></i><span class="time" id="currentTime"></span></div>
+
+        </div>
+    </div>
+
+    <div class="forecast">
+
+        @await Html.PartialAsync("_DailyForecast", @Model)
+
+    </div>
+<script>
+
+    setInterval(displayTime, 1000);
+
+    async function displayTime() {
+        let dt = new Date();
+        document.getElementById("currentTime").innerHTML = dt.toLocaleTimeString();
+    }
+
+</script>
