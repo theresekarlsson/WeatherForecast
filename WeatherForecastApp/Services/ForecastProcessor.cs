@@ -98,6 +98,7 @@ namespace WeatherForecastApp.Services
             return Math.Round(temp, 1, MidpointRounding.AwayFromZero);
         }
 
+        // called if attempt to retrieve data from API fails.
         internal static WeatherForecastViewModel GetDefaultViewModel()
         {
             var weatherforecasts = new WeatherForecastViewModel

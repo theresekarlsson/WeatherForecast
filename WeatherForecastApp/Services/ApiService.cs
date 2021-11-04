@@ -16,9 +16,9 @@ namespace WeatherForecastApp.Services
     public class ApiService : IApiService
     {
         private readonly HttpClient _client;
-        private readonly AppConfiguration _appConfig;    /* -- Needed for locally stored user secret */
+        private readonly AppConfiguration _appConfig;    /* -- Needed for locally stored secrets.json */
 
-        public ApiService(HttpClient client, AppConfiguration appConfig)   /* -- Needed for locally stored user secret */
+        public ApiService(HttpClient client, AppConfiguration appConfig)   /* -- Needed for locally stored secrets.json */
         {
             _appConfig = appConfig;
             _client = client;
@@ -64,7 +64,7 @@ namespace WeatherForecastApp.Services
 
             string apiKey = "INSERT API KEY HERE";
 
-            //string apiKey = _appConfig.ApiKey;   /* Use this instead when api key is stored using user secret */
+            //string apiKey = _appConfig.ApiKey;    /* Use this instead when your api key is stored in your local secrets.json file */
 
             return $"https://api.openweathermap.org/data/2.5/{apiResource}?units={units}&lat={lat}&lon={lon}&lang={language}&appid={apiKey}";
         }

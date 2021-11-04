@@ -21,7 +21,7 @@ namespace WeatherForecastApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /* -- Needed for USER SECRET */
+            /* -- Needed to retrieve Api key from locally stored secrets.json */
             //var config = new AppConfiguration
             //{
             //    ApiKey = Configuration["ApiKey"]
