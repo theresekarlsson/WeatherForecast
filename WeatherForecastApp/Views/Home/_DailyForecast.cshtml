@@ -1,14 +1,14 @@
 ﻿@model WeatherForecastViewModel
 
 @foreach (var day in @Model.Daily)
-{ 
+{
     <div class="card-bg">
         <div class="card-body">
             <div class="card-component">
                 <div>@day.DayOfWeek</div>
                 <div>@day.Date</div>
             </div>
-            <img class="card-component" alt="weather icon" src=@day.WeatherDescription[0].Icon>
+            <img class="card-component" alt="weather icon" src="@day.WeatherDescription[0].Icon">
             <div class="card-component">
                 <div class="max-temp">Max @day.TempMax°</div>
                 <div class="min-temp">Min @day.TempMin°</div>

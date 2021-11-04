@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -34,15 +35,23 @@ namespace WeatherForecastApp.Services
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             string url = BuildApiUrl();
-            var response = await _client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
 
-            var jsonOptions = new JsonSerializerOptions { IgnoreNullValues = false, PropertyNameCaseInsensitive = true };
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            var weatherResponse = await JsonSerializer.DeserializeAsync<WeatherResponseModel>(responseStream, jsonOptions);
+            try { 
+                var response = await _client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
 
-            WeatherForecastViewModel processedForecast = (WeatherForecastViewModel)ForecastProcessor.HandleResponse(weatherResponse);
-            return processedForecast;
+                var jsonOptions = new JsonSerializerOptions { IgnoreNullValues = false, PropertyNameCaseInsensitive = true };
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var weatherResponse = await JsonSerializer.DeserializeAsync<WeatherResponseModel>(responseStream, jsonOptions);
+
+                WeatherForecastViewModel processedForecast = (WeatherForecastViewModel)ForecastProcessor.HandleResponse(weatherResponse);
+            
+                return processedForecast;
+            }
+            catch (HttpRequestException)
+            {
+                return ForecastProcessor.GetDefaultViewModel();
+            }
         }
 
         private string BuildApiUrl()
@@ -53,9 +62,9 @@ namespace WeatherForecastApp.Services
             string lon = "13.505050";
             string language = "sv";
 
-            string apiKey = "e09144870f395b87ddfdb97ca2c502c5";
+            string apiKey = "INSERT API KEY HERE";
 
-            //string apiKey = _appConfig.ApiKey;   /* Use this instead when api key is stored in user secret */
+            //string apiKey = _appConfig.ApiKey;   /* Use this instead when api key is stored using user secret */
 
             return $"https://api.openweathermap.org/data/2.5/{apiResource}?units={units}&lat={lat}&lon={lon}&lang={language}&appid={apiKey}";
         }

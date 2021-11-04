@@ -13,7 +13,6 @@ namespace WeatherForecastApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IApiService _apiService;
 
-
         public HomeController(ILogger<HomeController> logger, IApiService apiService)
         {
             _logger = logger;

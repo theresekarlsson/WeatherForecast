@@ -58,6 +58,7 @@ namespace WeatherForecastApp.Services
             }
             return weatherforecasts;
         }
+
         private static double GetPrecipitation(double pop)
         {
             if (pop == 0)
@@ -95,6 +96,49 @@ namespace WeatherForecastApp.Services
         internal static double GetTemp(double temp)
         {
             return Math.Round(temp, 1, MidpointRounding.AwayFromZero);
+        }
+
+        internal static WeatherForecastViewModel GetDefaultViewModel()
+        {
+            var weatherforecasts = new WeatherForecastViewModel
+            {
+                CurrentDate = "No data available",
+                CurrentDayOfWeek = "",
+                CurrentTemp = 0,
+                CurrentFeelsLike = 0,
+                CurrentWindSpeed = 0,
+                CurrentPrecipitation = 0,
+                CurrentHumidity = 0,
+                WeatherDescription = new List<DescriptionModel>(),
+                Daily = new List<DailyForecastModel>()
+            };
+
+            var weatherDescription = new DescriptionModel
+            {
+                Description = "",
+                Icon = ""
+            };
+            weatherforecasts.WeatherDescription.Add(weatherDescription);
+
+            for (int i = 0; i < 5; i++)
+            {
+                var dailyForecastModel = new DailyForecastModel
+                {
+                    Date = "",
+                    DayOfWeek = "",
+                    TempMin = 0,
+                    TempMax = 0,
+                    WeatherDescription = new List<DescriptionModel>()
+                };
+
+                var dailyWeatherDescription = new DescriptionModel
+                {
+                    Icon = ""
+                };
+                dailyForecastModel.WeatherDescription.Add(dailyWeatherDescription);
+                weatherforecasts.Daily.Add(dailyForecastModel);
+            }
+            return weatherforecasts;
         }
     }
 }
