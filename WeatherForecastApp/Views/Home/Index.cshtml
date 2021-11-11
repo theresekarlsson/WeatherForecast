@@ -12,13 +12,17 @@
             <h2 class="thin-font">KARLSTAD</h2>
         </div>
     </div>
-   
-
-
 
     <div id="weatherCurrentAndDaily">
 
-        @await Html.PartialAsync("_WeatherCurrentAndDaily", @Model)
+        @if (String.IsNullOrEmpty(Model.CurrentDayOfWeek))
+        {
+            @await Html.PartialAsync("_WeatherUnavailable")
+        }
+        else
+        {
+            @await Html.PartialAsync("_WeatherCurrentAndDaily", @Model)
+        }
 
     </div>
 </div>

@@ -50,7 +50,7 @@ namespace WeatherForecastApp.Services
             }
             catch (HttpRequestException)
             {
-                return ForecastProcessor.GetDefaultViewModel();
+                return new WeatherForecastViewModel();
             }
         }
 
@@ -63,7 +63,6 @@ namespace WeatherForecastApp.Services
             string language = "sv";
 
             string apiKey = "INSERT API KEY HERE";
-
             //string apiKey = _appConfig.ApiKey;    /* Use this instead when your api key is stored in your local secrets.json file */
 
             return $"https://api.openweathermap.org/data/2.5/{apiResource}?units={units}&lat={lat}&lon={lon}&lang={language}&appid={apiKey}";
