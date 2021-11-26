@@ -7,7 +7,7 @@ namespace WeatherForecastApp.Services
 {
     public class ForecastProcessor
     {
-        internal static object HandleResponse(WeatherResponseModel forecastResponse)
+        internal static object HandleResponse(WeatherForecastResponseModel forecastResponse)
         {
             var weatherforecasts = new WeatherForecastViewModel
             {

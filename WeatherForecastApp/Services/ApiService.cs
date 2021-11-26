@@ -42,7 +42,7 @@ namespace WeatherForecastApp.Services
 
                 var jsonOptions = new JsonSerializerOptions { IgnoreNullValues = false, PropertyNameCaseInsensitive = true };
                 using var responseStream = await response.Content.ReadAsStreamAsync();
-                var weatherResponse = await JsonSerializer.DeserializeAsync<WeatherResponseModel>(responseStream, jsonOptions);
+                var weatherResponse = await JsonSerializer.DeserializeAsync<WeatherForecastResponseModel>(responseStream, jsonOptions);
 
                 WeatherForecastViewModel processedForecast = (WeatherForecastViewModel)ForecastProcessor.HandleResponse(weatherResponse);
             

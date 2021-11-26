@@ -2,7 +2,7 @@
 
 namespace WeatherForecastApp.Models
 {
-    public class WeatherResponseModel
+    public class WeatherForecastResponseModel
     {
         public Current Current { get; set; }
         public List<Daily> Daily { get; set; }
